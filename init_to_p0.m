@@ -1,3 +1,5 @@
+% codigo que leva da config inicial ate p0
+
 clear; close all; clc;
 
 % Columns: [theta d a alpha]
