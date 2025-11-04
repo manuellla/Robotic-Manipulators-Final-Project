@@ -98,9 +98,9 @@ theta_prev = theta_return_R; % Começa de onde parou (P0)
 [theta_P5, pos_P5, theta_traj_P5, err_P5, u_P5, err_pos_P5, err_rpy_P5, err_axang_P5] = ...
     controleRegulacao(COMAU_SmartSix, theta_prev, P5, Rd, K, epsilon, max_iter, dt);
 
-% movimentação losango (P5-PL1-P6-PL2-P5) (trajetória)
+% movimentação losango (P5-PL2-P6-PL2-P5) (trajetória)
 fprintf('\nControle de seguimento de trajetória: desenho do losango (anti-horário)\n\n');
-traj_points_losango = {P5, PL1, P6_losango, PL2, P5}; % sequência anti-horária
+traj_points_losango = {P5, PL2, P6_losango, PL1, P5}; % sequência anti-horária
 theta_prev = theta_P5; % Começa de P5
 pos_traj_losango = [];
 theta_traj_losango = [];
@@ -316,14 +316,6 @@ grid on;
 
 sgtitle('Erro de Orientação - Representação Eixo-Ângulo (Usado no Controle)');
 saveas(gcf, fullfile('figs', 'fig7_erro_eixo_angulo.png'));
-
-% Figure 8: Erro total (norma 6D)
-figure(8);
-plot(tempo, err, 'LineWidth', 2);
-xlabel('Tempo (s)'); ylabel('||e|| (m+rad)');
-title('Erro Total (Norma do Erro 6D: Posição + Orientação)');
-grid on;
-saveas(gcf, fullfile('figs', 'fig8_erro_total.png'));
 
 % Funções:
 % Função de controle de regulação
